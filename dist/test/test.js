@@ -14,6 +14,13 @@ let ConfigLoaderTest = class ConfigLoaderTest {
         let config = index_1.GlobalConfig.databaseConfig;
         should(config.get('address')).equal('http://admin:@develop.test-server:1337');
     }
+    asserts_dev() {
+        let config;
+        process.env['NODE_ENV'] = 'development';
+        index_1.ServerConfig.destroyInstance();
+        config = index_1.ServerConfig.getInstance().databaseConfig;
+        should(config.get('address')).equal('http://admin:@develop.test-server:1337');
+    }
     asserts_prod() {
         let config;
         process.env['environment'] = 'production';
@@ -32,6 +39,9 @@ let ConfigLoaderTest = class ConfigLoaderTest {
 __decorate([
     mocha_typescript_1.test("should load default config if no env was set")
 ], ConfigLoaderTest.prototype, "asserts_default", null);
+__decorate([
+    mocha_typescript_1.test("should load value from develop config")
+], ConfigLoaderTest.prototype, "asserts_dev", null);
 __decorate([
     mocha_typescript_1.test("should load value from production config")
 ], ConfigLoaderTest.prototype, "asserts_prod", null);

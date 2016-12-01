@@ -16,6 +16,21 @@ class ConfigLoaderTest {
         should(config.get('address')).equal('http://admin:@develop.test-server:1337');
     }
 
+
+    @test("should load value from develop config")
+    asserts_dev() {
+        // if no env was set or the setting / config does not exist there, this default will be used
+        // in case of develop dir, ist empty, so default should be used
+        let config;
+        process.env['NODE_ENV'] = 'development';
+
+        // new instance for new env (will destroy value on GlobalConfig as well)
+        ServerConfig.destroyInstance();
+        config = ServerConfig.getInstance().databaseConfig;
+
+        should(config.get('address')).equal('http://admin:@develop.test-server:1337');
+    }
+
     @test("should load value from production config")
     asserts_prod() {
         let config;
