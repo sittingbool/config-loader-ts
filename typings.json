@@ -1,0 +1,10 @@
+{
+  "name": "config-loader-ts",
+  "dependencies": {
+    "lodash": "registry:npm/lodash#4.0.0+20161015015725"
+  },
+  "globalDependencies": {
+    "node": "registry:env/node#6.0.0+20161105011511",
+    "should": "registry:dt/should#8.1.1+20160608082854"
+  }
+}
