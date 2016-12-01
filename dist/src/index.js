@@ -32,7 +32,7 @@ class ConfigLoader {
         this.configs = {};
         let env = process.env['environment'] || process.env['NODE_ENV'];
         let confFiles = [], filePaths = [];
-        this.environment = env || exports.ConfigEnv.Development;
+        this.environment = env || exports.ConfigEnv.Production;
         if (env) {
             console.log('Laded config for environment: ' + env + '.');
         }

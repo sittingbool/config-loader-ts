@@ -75,7 +75,7 @@ export class ConfigLoader
 
         let confFiles: string[] = [], filePaths = [];
 
-        this.environment = env || ConfigEnv.Development;
+        this.environment = env || ConfigEnv.Production;
 
         if ( env ) {
             console.log('Laded config for environment: ' + env + '.');
