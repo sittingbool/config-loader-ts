@@ -4,6 +4,7 @@
     "lodash": "registry:npm/lodash#4.0.0+20161015015725"
   },
   "globalDependencies": {
+    "load-json-file": "registry:dt/load-json-file#2.0.0+20160724055255",
     "node": "registry:env/node#6.0.0+20161105011511",
     "should": "registry:dt/should#8.1.1+20160608082854"
   }

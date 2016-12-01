@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
+const loadJsonFile = require('load-json-file');
 exports.ConfigEnv = {
     Production: 'production',
     Development: 'development',
@@ -74,11 +75,13 @@ class ConfigLoader {
             return path.extname(item) !== '.map' && fs.existsSync(item);
         });
         paths.forEach((fPath) => {
-            let current = require(fPath);
+            let current;
             switch (path.extname(name)) {
                 case '':
                 case '.js':
-                    if (!current || typeof current !== 'object' || !current.default || typeof current.default !== 'object') {
+                    current = require(fPath);
+                    if (!current || typeof current !== 'object' || !current.default ||
+                        typeof current.default !== 'object') {
                         current = {};
                     }
                     else {
@@ -86,6 +89,12 @@ class ConfigLoader {
                     }
                     break;
                 case '.json':
+                    try {
+                        current = loadJsonFile.sync(fPath);
+                    }
+                    catch (err) {
+                        console.error(err);
+                    }
                     if (!current || typeof current !== 'object') {
                         current = {};
                     }

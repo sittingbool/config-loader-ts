@@ -2,6 +2,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as _ from 'lodash';
+import * as loadJsonFile from 'load-json-file';
 //----------------------------------------------------------------------------------------------------------
 
 
@@ -138,17 +139,25 @@ export class ConfigLoader
         });
 
         paths.forEach((fPath) => {
-            let current = require(fPath);
+            let current;
             switch ( path.extname(name) ) {
                 case '': // for directory (should contain dao.index.ts / index.js)
                 case '.js':
-                    if ( !current || typeof current !== 'object' || !current.default || typeof current.default !== 'object' ) {
+                    current = require(fPath);
+                    if ( !current || typeof current !== 'object' || !current.default ||
+                        typeof current.default !== 'object' )
+                    {
                         current = {};
                     } else {
                         current = current.default;
                     }
                     break;
                 case '.json':
+                    try {
+                        current = loadJsonFile.sync(fPath);
+                    } catch ( err ) {
+                        console.error(err);
+                    }
                     if ( !current || typeof current !== 'object' ) {
                         current = {};
                     }
