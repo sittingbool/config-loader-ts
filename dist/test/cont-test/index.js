@@ -2,13 +2,20 @@
 const index_1 = require("../../src/index");
 class ServerConfig extends index_1.ConfigLoader {
     configDir() {
-        return __dirname;
+        let dir = __dirname, loadJson = process.env['json'];
+        if (parseInt(loadJson) === 1) {
+            dir = dir.replace('dist/', '');
+        }
+        return dir;
     }
     static getInstance() {
         return super.getInstance();
     }
     get databaseConfig() {
         return this.configForName('database');
+    }
+    get something() {
+        return this.configForName('something');
     }
 }
 exports.ServerConfig = ServerConfig;

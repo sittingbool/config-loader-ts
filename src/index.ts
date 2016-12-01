@@ -95,7 +95,8 @@ export class ConfigLoader
         confFiles = _.uniq(confFiles);
 
         confFiles = confFiles.filter(item => {
-            return path.extname(item) === '.js';
+            let extName = path.extname(item);
+            return (extName === '.js' || extName === '.json');
         });
 
         confFiles.forEach(( file: string) => {

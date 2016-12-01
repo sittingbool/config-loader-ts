@@ -35,6 +35,14 @@ let ConfigLoaderTest = class ConfigLoaderTest {
         config = index_1.ServerConfig.getInstance().databaseConfig;
         should(config.get('address', 'not found')).equal('http://admin:test@staging.test-server:1337');
     }
+    asserts_json() {
+        let config;
+        process.env['environment'] = index_2.ConfigEnv.Staging;
+        process.env['json'] = '1';
+        index_1.ServerConfig.destroyInstance();
+        config = index_1.ServerConfig.getInstance().something;
+        should(config.get('test', 'not found')).equal('hallo world');
+    }
 };
 __decorate([
     mocha_typescript_1.test("should load default config if no env was set")
@@ -48,6 +56,9 @@ __decorate([
 __decorate([
     mocha_typescript_1.test("should load value from staging config")
 ], ConfigLoaderTest.prototype, "asserts_stage", null);
+__decorate([
+    mocha_typescript_1.test("should load value from staging config")
+], ConfigLoaderTest.prototype, "asserts_json", null);
 ConfigLoaderTest = __decorate([
     mocha_typescript_1.suite("ConfigLoaderTest")
 ], ConfigLoaderTest);

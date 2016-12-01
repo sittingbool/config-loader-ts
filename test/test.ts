@@ -55,4 +55,18 @@ class ConfigLoaderTest {
         // notice the default value in config.get()
         should(config.get('address', 'not found')).equal('http://admin:test@staging.test-server:1337');
     }
+
+    @test("should load value from staging config")
+    asserts_json() {
+        let config;
+        process.env['environment'] = ConfigEnv.Staging;
+        process.env['json'] = '1';
+
+        // new instance for new env (will destroy value on GlobalConfig as well)
+        ServerConfig.destroyInstance();
+        config = ServerConfig.getInstance().something;
+
+        // notice the default value in config.get()
+        should(config.get('test', 'not found')).equal('hallo world');
+    }
 }

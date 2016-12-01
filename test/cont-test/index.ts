@@ -12,7 +12,13 @@ export class ServerConfig extends ConfigLoader
     configDir():string
     //------------------------------------------------------------------------------------------------------
     {
-        return __dirname;
+        let dir =  __dirname, loadJson = process.env['json'];
+
+        if ( parseInt(loadJson) === 1 ) {
+            dir = dir.replace('dist/', '');
+        }
+
+        return dir;
     }
 
 
@@ -30,6 +36,14 @@ export class ServerConfig extends ConfigLoader
     //------------------------------------------------------------------------------------------------------
     {
         return this.configForName('database');
+    }
+
+
+    //------------------------------------------------------------------------------------------------------
+    get something(): ConfigObject
+    //------------------------------------------------------------------------------------------------------
+    {
+        return this.configForName('something');
     }
 }
 
