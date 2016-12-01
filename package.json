@@ -1,6 +1,6 @@
 {
   "name": "config-loader-ts",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Configuration loader for environment specific cnfigurations",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
