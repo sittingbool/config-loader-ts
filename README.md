@@ -19,6 +19,22 @@ The Goal:
 - write your own settings access function like shown below.
 
 ```
+// folder structure example (see test directory for example):
+
+/app
+    /configs
+        /default
+            my-conf.config.ts
+        /development
+            // missing here, so default will be used
+        /staging
+            my-conf.config.ts
+        /production
+            my-conf.config.ts
+
+```
+
+```
 export class MyConfig extends ConfigLoader{
 
     // overridden
