@@ -12,7 +12,8 @@ const index_2 = require("../src/index");
 let ConfigLoaderTest = class ConfigLoaderTest {
     asserts_default() {
         let config = index_1.GlobalConfig.databaseConfig;
-        should(config.get('address')).equal('http://admin:@develop.test-server:1337');
+        should(config.get('address')).equal('http://admin:test@prod.test-server:1337');
+        should(config.get('someOther')).equal('I am the default');
     }
     asserts_dev() {
         let config;

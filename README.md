@@ -17,6 +17,7 @@ The Goal:
 - the current environment is primarily read from `process.env.environment` so you can set it independent fron your Node.js environment if needed. alternatively it is read from `process.env.NODE_ENV` which is the default environment setting for node.js.
 - create a subclass of `ConfigLoader` and override the `configDir()` method so that it returns the location of the parent directory of all your environment specific config folders if its not the same as where this subclass is located.
 - write your own settings access function like shown below.
+- Please check the test directory. It contains an example in itself and has additional info in comments.
 
 ```
 // folder structure example (see test directory for example):

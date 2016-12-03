@@ -11,9 +11,13 @@ class ConfigLoaderTest {
 
     @test("should load default config if no env was set")
     asserts_default() {
-        // if no env was set or the setting / config does not exist there, this default will be used
+        // if no env was set or the setting / config does not exist there, default will be used
+        // if no environment is set the default environment is used, which is 'production'
+        // now that there is a setting for address in production config it will be read
+        // the value from someOther will be the one from the default config because it was not overridden by production config
         let config = GlobalConfig.databaseConfig;
-        should(config.get('address')).equal('http://admin:@develop.test-server:1337');
+        should(config.get('address')).equal('http://admin:test@prod.test-server:1337');
+        should(config.get('someOther')).equal('I am the default');
     }
 
 
