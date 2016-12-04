@@ -60,7 +60,7 @@ class ConfigLoaderTest {
         should(config.get('address', 'not found')).equal('http://admin:test@staging.test-server:1337');
     }
 
-    @test("should load value from staging config")
+    @test("should load merged default value even when on specified environment")
     asserts_json() {
         let config;
         process.env['environment'] = ConfigEnv.Staging;
